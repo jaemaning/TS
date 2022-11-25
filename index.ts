@@ -1,3 +1,5 @@
+// 터미널에서 tsc -w 로 js파일 자동변환
+
 type Mytype = string | number
 
 let 이름: Mytype = 'kim';
@@ -118,7 +120,77 @@ console.log(b)
 function cleaning(x: (string | number)[]) {
     for (let element in x) {
         if (typeof x[element] === "string") {
-            x[element] = parseFloat(x[element])
+            x[element] as number
         }
     }
 }
+
+// type alias (작명은 대문자로 시작+ Type 붙히는게 국룰)
+type AnimalType = string | number | undefined;
+
+let 동물: AnimalType;
+
+type AnimalsType = { name: string, age: number }
+let 동물info: AnimalsType = { name: '기린', age: 5 }
+
+// typescript 내에선 object 자료 수정도 막을 수 있음. ( readonly ) typescript 내에서만 block 이후 javascript로 바뀐 파일에선 바뀜
+type GirlfriendTyep = {
+    readonly name: string
+    age?: number
+}
+const girlfriend: GirlfriendTyep = {
+    name: '수지'
+}
+
+//type 변수를 union type 으로 합치가 가능.
+
+type NameType = string;
+type AgeType = number;
+type PersonType = NameType | AgeType;
+
+type PositionX = { x: number };
+type PositionY = { y: number };
+type XandY = PositionX & PositionY  // object 타입 extend 하기
+let 좌표: XandY = { x: 1, y: 2 }
+
+// test
+type EType = {
+    color?: string,
+    size: number,
+    readonly position: number[]
+}
+
+let test: EType = { size: 10, position: [1, 2, 3] }
+
+
+type TestType = {
+    name: string,
+    phone: number,
+    email: string,
+}
+type AdultType = {
+    adult: boolean
+}
+
+type NewTestType = TestType & AdultType;
+
+let test2: NewTestType = { name: 'kim', phone: 123, email: 'abc@naver.com', adult: true }
+
+// literal types (const변수의 업그레이드 버전 - 여러가지 변하지 않는 값을 넣을수 있고 자동완성도 가능)
+let literal: '123' | '1234' | '12345';    // literal = 456; 에러남
+literal = '123'   // 자동완성 가능
+
+function Myfunction(a: '가위' | '바위' | '보'): ['가위' | '바위' | '보'] {
+    return ['가위']
+}
+
+var 자료 = {
+    name: 'kim'
+} as const; // readonly literal type 으로 지정 as const object자료 잠그기!
+
+function my함수(a: 'kim') {
+
+}
+my함수(자료.name)
+
+

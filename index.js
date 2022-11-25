@@ -1,3 +1,4 @@
+// 터미널에서 tsc -w 로 js파일 자동변환
 var 이름 = 'kim';
 이름 = 123;
 function 함수(x) {
@@ -78,7 +79,27 @@ console.log(b);
 function cleaning(x) {
     for (var element in x) {
         if (typeof x[element] === "string") {
-            x[element] = parseFloat(x[element]);
+            x[element];
         }
     }
 }
+var 동물;
+var 동물info = { name: '기린', age: 5 };
+var girlfriend = {
+    name: '수지'
+};
+var 좌표 = { x: 1, y: 2 };
+var test = { size: 10, position: [1, 2, 3] };
+var test2 = { name: 'kim', phone: 123, email: 'abc@naver.com', adult: true };
+// literal types (const변수의 업그레이드 버전 - 여러가지 변하지 않는 값을 넣을수 있고 자동완성도 가능)
+var literal; // literal = 456; 에러남
+literal = '123'; // 자동완성 가능
+function Myfunction(a) {
+    return ['가위'];
+}
+var 자료 = {
+    name: 'kim'
+}; // readonly literal type 으로 지정 as const object자료 잠그기!
+function my함수(a) {
+}
+my함수(자료.name);
