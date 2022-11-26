@@ -193,4 +193,58 @@ function my함수(a: 'kim') {
 }
 my함수(자료.name)
 
+// 함수 타입 alias 저장해서 사용
 
+type MyFunctionType = (a: string) => number | void;
+
+let myfunctions: MyFunctionType = function (a) {
+
+}
+
+// object 안에 함수
+type 회원정보Type = {
+    name: string,
+    plusOne: (a: number) => number,
+    changeName: (a: string) => void
+}
+let 회원정보: 회원정보Type = {
+    name: 'kim',
+    plusOne(a) {
+        return a + 1
+    },
+    changeName: function (a) {
+        회원정보.name = a;
+        return;
+    }
+}
+
+let objectFunctionValue = 회원정보.plusOne(4)
+
+// test
+type CutZeroType = (a: string) => string;
+let cutZero: CutZeroType = function (a) {
+    let result = 'a'
+    if (a[0] == '0') {
+        result = a.slice(1)
+    } else {
+        result = a
+    }
+    return result;
+}
+
+type RemoveDashType = (a: string) => number;
+let removeDash: RemoveDashType = function (a) {
+    let result = parseFloat(a.replace(/-/g, ''))
+    return result
+}
+
+// console.log(removeDash('010-1111-2222'))
+// console.log(cutZero('010-1111-2222'))
+
+function newTestFunction(a: string, func1, func2) {
+    let result = func1(a)
+    result = func2(result)
+    return result;
+}
+
+console.log(newTestFunction('010-1111-2222', cutZero, removeDash))

@@ -103,3 +103,38 @@ var 자료 = {
 function my함수(a) {
 }
 my함수(자료.name);
+var myfunctions = function (a) {
+};
+var 회원정보 = {
+    name: 'kim',
+    plusOne: function (a) {
+        return a + 1;
+    },
+    changeName: function (a) {
+        회원정보.name = a;
+        return;
+    }
+};
+var objectFunctionValue = 회원정보.plusOne(4);
+var cutZero = function (a) {
+    var result = 'a';
+    if (a[0] == '0') {
+        result = a.slice(1);
+    }
+    else {
+        result = a;
+    }
+    return result;
+};
+var removeDash = function (a) {
+    var result = parseFloat(a.replace(/-/g, ''));
+    return result;
+};
+// console.log(removeDash('010-1111-2222'))
+// console.log(cutZero('010-1111-2222'))
+function newTestFunction(a, func1, func2) {
+    var result = func1(a);
+    result = func2(result);
+    return result;
+}
+console.log(newTestFunction('010-1111-2222', cutZero, removeDash));
