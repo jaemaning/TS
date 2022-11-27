@@ -2,5 +2,6 @@
     "compilerOptions": {
         "target": "ES5",
         "module": "commonjs",
+        "strictNullChecks": true // html 셀렉터 조작시 null 값 캐치 가능
     }
 }

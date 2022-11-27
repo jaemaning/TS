@@ -248,3 +248,5 @@ function newTestFunction(a: string, func1, func2) {
 }
 
 console.log(newTestFunction('010-1111-2222', cutZero, removeDash))
+
+// HTML 조작 => myindex.ts => myindex.js 에서
