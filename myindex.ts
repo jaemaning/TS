@@ -40,3 +40,119 @@ let 이미지 = document.querySelector('.image1');
         이미지.src = "b.png";
     }
 })
+
+// class 문법과 prototype 타입지정 ( ES6 )
+class Person {
+    name: string;
+    constructor(naming: string) {
+        this.name = naming;
+    }
+
+    함수(a: string = 'kim'): void {
+        console.log('안녕' + a)
+    }
+}
+
+let 사람1 = new Person('kim');
+let 사람2 = new Person('park');
+
+사람1.함수()
+
+// test
+class Car {
+    model: string;
+    price: number;
+    constructor(name: string, price: number) {
+        this.model = name
+        this.price = price
+    }
+
+    tax(): number {
+        return (this.price) / 10
+    }
+}
+
+let car1 = new Car('소나타', 3000)
+
+class Word {
+    num;
+    str;
+    constructor(...args) {
+        let numbers: number[] = []
+        let strings: string[] = []
+        for (let i = 0; i < args.length; i++) {
+            if (typeof args[i] === "string") {
+                strings.push(args[i])
+            } else {
+                numbers.push(args[i])
+            }
+        }
+        this.num = numbers;
+        this.str = strings;
+    }
+}
+
+let ww = new Word('a', 'b', 1, 2)
+
+// object 타입지정시 interface 사용가능
+
+interface SquareType {
+    color: string,
+    width: number
+}
+// interface 장점 => extends 복사가능  
+// type 사용할떄는 & 기호로 복사가능
+
+//        type         vs       interface    
+//      중복선언x                중복선언o
+
+let 네모: SquareType = { color: 'red', width: 100 }
+
+interface StudentType {
+    name: string
+}
+interface StudentType {
+    score: number
+}
+// interface 는 중복선언 가능 StudentType {name : string, score :number} 합쳐짐
+
+interface TeacherType extends StudentType {
+    age: number
+}
+
+let 학생: StudentType = { name: 'kim', score: 20 }
+let 선생: TeacherType = { name: 'park', age: 20, score: 80 }
+
+// test
+interface ProductType {
+    brand: string,
+    serialNumber: number,
+    model: string[],
+}
+
+let 상품: ProductType = { brand: 'Samsung', serialNumber: 1360, model: ['TV', 'phone'] }
+
+interface Card {
+    card: boolean
+}
+interface CartType extends Card {
+    product: string,
+    price: number
+}
+
+
+let 장바구니: CartType[] = [{ product: '청소기', price: 7000, card: false }, { product: '삼다수', price: 800, card: false }]
+
+interface PlusMinusType {
+    plus: (a: number, b: number) => number,
+    minus: (a: number, b: number) => number
+}
+
+let 자신감: PlusMinusType = {
+    plus: function (a, b) {
+        return a + b;
+    },
+    minus: function (a, b) {
+        return a - b
+    }
+}
