@@ -74,17 +74,20 @@ class Car {
 
 let car1 = new Car('소나타', 3000)
 
+// rest parameters
+
 class Word {
     num;
     str;
-    constructor(...args) {
+    constructor(...args: (number | string)[]) {
         let numbers: number[] = []
         let strings: string[] = []
         for (let i = 0; i < args.length; i++) {
+            let arg = args[i]
             if (typeof args[i] === "string") {
-                strings.push(args[i])
+                strings.push(arg as string)
             } else {
-                numbers.push(args[i])
+                numbers.push(arg as number)
             }
         }
         this.num = numbers;
@@ -93,6 +96,17 @@ class Word {
 }
 
 let ww = new Word('a', 'b', 1, 2)
+
+// spread operator : 괄호 벗겨주세요
+
+let arr1 = [1, 2, 3];
+let arr2 = [4, 5];
+let arr3 = [...arr1, ...arr2]
+// arr3 = [1,2,3,4,5]
+
+//destucturing 
+let [변수1, 변수2] = ['안녕', 100]
+let { student, ageA } = { student: true, ageA: 20 }
 
 // object 타입지정시 interface 사용가능
 
@@ -156,3 +170,29 @@ let 자신감: PlusMinusType = {
         return a - b
     }
 }
+
+// rest parameters
+function maxfun(...args: number[]) {
+    let a: number = 0
+    args.forEach((i) => {
+        if (a < i) {
+            a = i
+        }
+    })
+    return a
+}
+
+console.log(maxfun(6, 3, 7, 2))
+
+//test
+
+function 함수1({ user, comment, admin }: { user: string, comment: number[], admin: boolean }): void {
+    console.log(user, comment, admin)
+}
+
+함수1({ user: 'kim', comment: [3, 5, 4], admin: false })
+
+function 함수2([a, b, c]: [a: number, b: string, c: boolean]): void {
+    console.log(a, b, c)
+}
+함수2([40, 'wine', false])

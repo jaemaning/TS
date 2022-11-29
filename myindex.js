@@ -1,4 +1,13 @@
 // narrowing 방법 5가지
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 var title1 = document.querySelector('#title');
 // 1
 if (title1 !== null) {
@@ -55,6 +64,7 @@ var Car = /** @class */ (function () {
     return Car;
 }());
 var car1 = new Car('소나타', 3000);
+// rest parameters
 var Word = /** @class */ (function () {
     function Word() {
         var args = [];
@@ -64,11 +74,12 @@ var Word = /** @class */ (function () {
         var numbers = [];
         var strings = [];
         for (var i = 0; i < args.length; i++) {
+            var arg = args[i];
             if (typeof args[i] === "string") {
-                strings.push(args[i]);
+                strings.push(arg);
             }
             else {
-                numbers.push(args[i]);
+                numbers.push(arg);
             }
         }
         this.num = numbers;
@@ -77,6 +88,14 @@ var Word = /** @class */ (function () {
     return Word;
 }());
 var ww = new Word('a', 'b', 1, 2);
+// spread operator : 괄호 벗겨주세요
+var arr1 = [1, 2, 3];
+var arr2 = [4, 5];
+var arr3 = __spreadArray(__spreadArray([], arr1, true), arr2, true);
+// arr3 = [1,2,3,4,5]
+//destucturing 
+var _a = ['안녕', 100], 변수1 = _a[0], 변수2 = _a[1];
+var _b = { student: true, ageA: 20 }, student = _b.student, ageA = _b.ageA;
 // interface 장점 => extends 복사가능  
 // type 사용할떄는 & 기호로 복사가능
 //        type         vs       interface    
@@ -94,3 +113,29 @@ var 자신감 = {
         return a - b;
     }
 };
+// rest parameters
+function maxfun() {
+    var args = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        args[_i] = arguments[_i];
+    }
+    var a = 0;
+    args.forEach(function (i) {
+        if (a < i) {
+            a = i;
+        }
+    });
+    return a;
+}
+console.log(maxfun(6, 3, 7, 2));
+//test
+function 함수1(_a) {
+    var user = _a.user, comment = _a.comment, admin = _a.admin;
+    console.log(user, comment, admin);
+}
+함수1({ user: 'kim', comment: [3, 5, 4], admin: false });
+function 함수2(_a) {
+    var a = _a[0], b = _a[1], c = _a[2];
+    console.log(a, b, c);
+}
+함수2([40, 'wine', false]);
