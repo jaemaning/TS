@@ -139,3 +139,54 @@ function 함수2(_a) {
     console.log(a, b, c);
 }
 함수2([40, 'wine', false]);
+// Narrowing 방법들
+function 함수3(a) {
+    if (a && typeof a === 'string') {
+        // a 가 존재하고 type이 string 이면 실행
+    }
+}
+function 함수5(animal) {
+    if ("swim" in animal) {
+        return animal.swim; //tyep narrowing Fish type 이 있는지 검사
+    }
+    return animal.fly;
+}
+// 위에 타입은 하나로 만들었어야함
+function 함수6(x) {
+    if (x.wheel === '4개') {
+        console.log('이 차는 ' + x.color);
+    }
+    else {
+        console.log('이 바이크는 ' + x.color);
+    }
+}
+// never type  (함수의 return 값이 없어야함, endpoint 가 없어야함 모든함수는 return 을안해도 return undefined됨.)
+function 함수4() {
+    throw new Error(); // error 로 함수 중단 or while true 무한루프로 중단
+}
+// 거의 쓸일없고 return값이 없으면 void 로 대체하면됨
+// 가능하지 않은 경우 never 타입으로 표시되는것만 알고 있으면 됨. (문제가있는경우)
+// typescript 에선 객체지향 public private protexted static 등을 사용 가능
+var User = /** @class */ (function () {
+    function User(a, b) {
+        this.familyName = 'kim';
+        this.name = a + this.familyName;
+        this.age = b;
+    }
+    // 만약 private 변수를 변경하고 싶으면??
+    User.prototype.familynameChange = function () {
+        this.familyName = 'park';
+    };
+    return User;
+}());
+var 유저1 = new User('jaeman', 29);
+유저1.name = 'kim';
+유저1.familynameChange();
+// public 축약어 가능
+var Football = /** @class */ (function () {
+    function Football(nation) {
+        this.nation = nation;
+    }
+    return Football;
+}());
+var worldcup = new Football('한국');
