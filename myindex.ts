@@ -120,7 +120,7 @@ interface SquareType {
 //        type         vs       interface    
 //      중복선언x                중복선언o
 
-let 네모: SquareType = { color: 'red', width: 100 }
+let 네모1: SquareType = { color: 'red', width: 100 }
 
 interface StudentType {
     name: string
@@ -264,8 +264,69 @@ let 유저1 = new User('jaeman', 29)
 
 // public 축약어 가능
 class Football {
+    protected x = 10;
     constructor(public nation: string) {
 
     }
 }
 let worldcup = new Football('한국');
+
+// class 복사 하고 싶으면 extends 하면됨.
+
+class NewFootball extends Football {
+    doThis() {
+        this.x = 20;
+    }
+}
+
+// protected = private 거의 비슷하지만 protected 는 extedns 에서 사용가능
+
+//class static
+
+class NewUser {
+    private static x = 10;
+    y = 20;
+}
+let 자식들 = new NewUser(); // 자식들은 static 을 가지지 못함. 부모만 쓰는게가능
+// default값은 자식만 사용가능.static은  private / protected / public 과 같이 사용가능
+
+class Usercon {
+    private static x = 10;
+    public static y = 20;
+    static addOne(a: number) {
+        Usercon.x = Usercon.x + a
+    }
+    static printx(): void {
+        console.log(Usercon.x)
+    }
+}
+Usercon.addOne(3)
+Usercon.printx()
+
+class Square {
+    x: number;
+    y: number;
+    color: string;
+    constructor(x: number, y: number, c: string) {
+        this.x = x
+        this.y = y
+        this.color = c
+    }
+    draw(): void {
+        const newDiv = document.createElement('div');
+        newDiv.className = 'square'
+        newDiv.style.backgroundColor = this.color
+        newDiv.style.height = this.y + "px"
+        newDiv.style.width = this.x + "px"
+        newDiv.style.display = 'block'
+        newDiv.style.marginLeft = Math.random() * 500 + 'px'
+        newDiv.style.marginTop = Math.random() * 150 + 'px'
+        document.body.appendChild(newDiv);
+    }
+}
+
+let 네모 = new Square(30, 30, 'red');
+네모.draw()
+네모.draw()
+네모.draw()
+네모.draw()

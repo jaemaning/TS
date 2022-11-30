@@ -1,4 +1,19 @@
 // narrowing 방법 5가지
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
         if (ar || !(i in from)) {
@@ -100,7 +115,7 @@ var _b = { student: true, ageA: 20 }, student = _b.student, ageA = _b.ageA;
 // type 사용할떄는 & 기호로 복사가능
 //        type         vs       interface    
 //      중복선언x                중복선언o
-var 네모 = { color: 'red', width: 100 };
+var 네모1 = { color: 'red', width: 100 };
 var 학생 = { name: 'kim', score: 20 };
 var 선생 = { name: 'park', age: 20, score: 80 };
 var 상품 = { brand: 'Samsung', serialNumber: 1360, model: ['TV', 'phone'] };
@@ -186,7 +201,69 @@ var 유저1 = new User('jaeman', 29);
 var Football = /** @class */ (function () {
     function Football(nation) {
         this.nation = nation;
+        this.x = 10;
     }
     return Football;
 }());
 var worldcup = new Football('한국');
+// class 복사 하고 싶으면 extends 하면됨.
+var NewFootball = /** @class */ (function (_super) {
+    __extends(NewFootball, _super);
+    function NewFootball() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    NewFootball.prototype.doThis = function () {
+        this.x = 20;
+    };
+    return NewFootball;
+}(Football));
+// protected = private 거의 비슷하지만 protected 는 extedns 에서 사용가능
+//class static
+var NewUser = /** @class */ (function () {
+    function NewUser() {
+        this.y = 20;
+    }
+    NewUser.x = 10;
+    return NewUser;
+}());
+var 자식들 = new NewUser(); // 자식들은 static 을 가지지 못함. 부모만 쓰는게가능
+// default값은 자식만 사용가능.static은  private / protected / public 과 같이 사용가능
+var Usercon = /** @class */ (function () {
+    function Usercon() {
+    }
+    Usercon.addOne = function (a) {
+        Usercon.x = Usercon.x + a;
+    };
+    Usercon.printx = function () {
+        console.log(Usercon.x);
+    };
+    Usercon.x = 10;
+    Usercon.y = 20;
+    return Usercon;
+}());
+Usercon.addOne(3);
+Usercon.printx();
+var Square = /** @class */ (function () {
+    function Square(x, y, c) {
+        this.x = x;
+        this.y = y;
+        this.color = c;
+    }
+    Square.prototype.draw = function () {
+        var newDiv = document.createElement('div');
+        newDiv.className = 'square';
+        newDiv.style.backgroundColor = this.color;
+        newDiv.style.height = this.y + "px";
+        newDiv.style.width = this.x + "px";
+        newDiv.style.display = 'block';
+        newDiv.style.marginLeft = Math.random() * 500 + 'px';
+        newDiv.style.marginTop = Math.random() * 150 + 'px';
+        document.body.appendChild(newDiv);
+    };
+    return Square;
+}());
+var 네모 = new Square(30, 30, 'red');
+네모.draw();
+네모.draw();
+네모.draw();
+네모.draw();
