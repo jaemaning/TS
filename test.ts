@@ -58,3 +58,31 @@ class Person<T> {
 }
 let person = new Person<string>('어쩌구');
 person.name //any 타입이 되었넹 
+
+let 멍멍: [string, boolean?] = ['dog', true] // tuple type
+
+let 내가먹은음식: [string, number, boolean] = ['피자', 20000, true]
+
+let arr: [string, number, ...boolean[]] = ['동서녹차', 4000, true, false, true, true, false, true]
+
+function 내함수는(...a: [string, boolean, ...(number | string)[]]): void {
+    console.log(a)
+}
+
+function 다른함수(...a: (string | number)[]) {
+    let 문자들: string[] = []
+    let 숫자들: number[] = []
+    let b: string | number = 0
+
+    for (b of a) {
+        if (typeof b === 'string') {
+            문자들.push(b)
+        } else if (typeof b === 'number') {
+            숫자들.push(b)
+        }
+    }
+
+    return [문자들, 숫자들]
+}
+
+console.log(다른함수('b', 5, 6, 8, 'a'))
